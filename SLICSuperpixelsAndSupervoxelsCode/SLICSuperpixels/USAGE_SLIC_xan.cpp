@@ -105,7 +105,7 @@ void CannyThreshold(int, void*)
   dst = Scalar::all(0);
 
   src.copyTo( dst, detected_edges);
-  //imshow( window_name, dst );
+  imshow( window_name, dst );
  }
 
 //Function to load label files
@@ -433,10 +433,10 @@ int main()
   	cvtColor( src, src_gray, CV_BGR2GRAY );
 
   	/// Create a window
-  	//namedWindow( window_name, CV_WINDOW_AUTOSIZE );
+  	namedWindow( window_name, CV_WINDOW_AUTOSIZE );
 
   	/// Create a Trackbar for user to enter threshold
-  	//createTrackbar( "Min Threshold:", window_name, &lowThreshold, max_lowThreshold, CannyThreshold );
+  	createTrackbar( "Min Threshold:", window_name, &lowThreshold, max_lowThreshold, CannyThreshold );
 	std::cout << "Canny Edge Processing" << std::endl;
   	/// Show the image
   	CannyThreshold(0, 0);
@@ -496,9 +496,9 @@ int main()
 	cout << "The number of locations for HoG: " << locations.size() << endl;
 	//Mat img_keypoints_3 = cv::Mat(imageResized.rows,imageResized.cols,CV_16UC1);;
 	Mat img_keypoints_3 = get_hogdescriptor_visu(src_gray, descriptorsValues, Size(src_gray.rows,src_gray.cols));
-	//for(int i =0; i<locations.size();i++){
-	//	img_keypoints_3.at<float>(locations[i]) = descriptorsValues[i];
-	//}
+	for(int i =0; i<locations.size();i++){
+		img_keypoints_3.at<float>(locations[i]) = descriptorsValues[i];
+	}
 
   	//show image
   	//imshow("HoG Values", img_keypoints_3);
@@ -511,7 +511,7 @@ int main()
 	bigImage.push_back(image1);
 	bigImage.push_back(img_keypoints_1);
 	bigImage.push_back(img_keypoints_2);
-	bigImage.push_back(img_keypoints_3);
+	//bigImage.push_back(img_keypoints_3);
 	
 	Mat bigImage1 = createOne(bigImage,3,2);
   	imshow("All Values", bigImage1);

@@ -121,7 +121,7 @@ int main( void )
        // Parameters of your slideing window
 
        // Parameters of your slideing window
-      string src = "/home/alex/Downloads/101_ObjectCategories/butterfly/image_0003.jpg";
+      string src = "/home/alex/Downloads/yalefaces/yalefaces/resize-resize-subject01.glasses.jpg.jpg";
       Mat Img = imread(src); // Read the image file
       cout<<"Image read of Size " << Img.rows << "x" <<Img.cols <<endl;
       Mat G,G1;
@@ -132,17 +132,20 @@ int main( void )
        int StepSlide = 30;
        // IF you want to make a copy, and do not change the source image- Use clone();
        Mat DrawResultGrid= G.clone();
-       
+       imshow("Gray", G);
+       waitKey(0);
        // Feture vect for Haar elements
        vector<double> haarFeat;
-       
+       cout << G.rows - windows_n_rows << " " << G.cols - windows_n_cols << endl;
 
        // Cycle row step
       for (int row = 0; row <= G.rows - windows_n_rows; row += StepSlide)
       {
         // Cycle col step
+        cout << "entered the first loop" << endl;
         for (int col = 0; col <= G.cols - windows_n_cols; col += StepSlide)
         {
+          cout << "entered the second loop" << endl;
           // There could be feature evaluator  over Windows
 
           // resulting window   
@@ -196,7 +199,7 @@ int main( void )
           }
           //for element 2 detection (Nose bridge)
           for(int i=0;i< (isumRoi.rows-bWd) ;i+=15){
-   	    for(int j=0; j< (isumRoi.cols-bHt),;j+=10){
+   	    for(int j=0; j< (isumRoi.cols-bHt);j+=10){
               double s1 = isumRoi.at<double>(i+bWd/3-1,j+bHt-1) -isumRoi.at<double>(i+bWd/3-1,j)-isumRoi.at<double>(i,j+bHt-1)+isumRoi.at<double>(i,j);
                
               double s2 = isumRoi.at<double>(i+bWd*2/3-1,j+bHt-1) -isumRoi.at<double>(i+bWd*2/3-1,j)-isumRoi.at<double>(i+bWd/3-1,j+bHt-1)+isumRoi.at<double>(i+bWd/3-1,j);
